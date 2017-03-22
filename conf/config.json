@@ -1,0 +1,111 @@
+{
+  "api": {
+    "serverName": "Traffic Splitter",
+    "port": 80,
+    "maxConnections": 1024,
+    "upstreamKeepAlive": {
+      "maxSockets": 1024,
+      "maxFreeSockets": 64,
+      "timeout": 60000,
+      "keepAliveTimeout": 30000
+    }
+  },
+  "cors": {
+    "headers": [
+        "ORIGIN",
+        "X_REQUESTED_WITH",
+        "X-Requested-with",
+        "Content-Type",
+        "Accept"
+    ],
+    "credentials": "true",
+    "methods": [
+        "GET",
+        "POST",
+        "DELETE",
+        "OPTIONS",
+        "PUT"
+    ],
+    "max-age": "600"
+  },
+  "browserId": {
+    "cookie": "bid",
+    "defaultDomain": "qa.tvg.com",
+    "domains": [
+      "qa.tvg.com",
+      "us.betfair.com",
+      "betfair.local",
+      "dev.betfair",
+      "dev.betfair:443",
+      "dev.betfair:8443",
+      "localhost.betfair.com:8443"
+    ],
+    "domain": "qa.tvg.com",
+    "maxAge": 315360000,
+    "length": 12
+  },
+  "circuitBreaker": {
+    "enabled": true,
+    "dryrun": false,
+    "interval": 5000,
+    "numIntervalPeriods": 6,
+    "responseTimeThreshold": {
+      "min": 5000,
+      "max": 10000
+    },
+    "errorCode": "503",
+    "errorMessage": "Server is temporarily at capacity"
+  },
+  "upstreams": [
+    {
+      "name": "TVG",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "bucket": {
+            "min": 50,
+            "max": 90
+          },
+          "host": [
+            "localhost"
+          ],
+          "cookie": {
+            "name": "letme",
+            "value": "in"
+          },
+          "path": [
+            "/tvg",
+            "/rule"
+          ],
+          "visitor": false
+        },
+        "out": {
+          "device": [
+            {
+              "device": "tablet"
+            }
+          ],
+          "geoip": [
+            {
+              "country": "US",
+              "region": "",
+              "city": ""
+            }
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "service.tvg.com",
+          "port": 80
+        }
+      },
+      "priority": true
+    }
+  ],
+  "bunyan": {
+    "name": "traffic-splitter",
+    "streams": []
+  }
+}
