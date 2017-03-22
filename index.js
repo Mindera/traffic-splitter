@@ -1,26 +1,17 @@
-'use strict'
+const fs = require('fs');
 
-const fs = require('fs')
-let config = JSON.parse(fs.readFileSync('./conf/config.json'))
+const config = JSON.parse(fs.readFileSync('./conf/config.json'));
 
-const TrafficSplitter = require('./lib/splitter')
-// console.log(TrafficSplitter)
+const Splitter = require('./lib/splitter');
 
-// this is optional since the splitter also does this
-if (!TrafficSplitter.isConfigurationValid(config)) {
-  throw new Error('My configuration is invalid!')
+try {
+  const splitter = new Splitter(config);
+  splitter.on('application_start', () => {
+    console.log('application_start');
+  });
+  // start should only be called after adding all events, middlewares and rules
+  // start can only be called once in each instance
+  splitter.start();
+} catch (e) {
+  console.log(`${e.name}: ${e.message}`);
 }
-
-const splitter = new TrafficSplitter(config)
-// console.log(splitter)
-
-splitter.on('application_start', () => {
-  console.log('application_start')
-})
-
-// start should only be called after adding all events, middlewares and rules
-// start can only be called once in each instance
-splitter.start()
-
-// only the next line will be available in production
-module.exports = TrafficSplitter
