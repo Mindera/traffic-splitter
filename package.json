@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "eslint index.js; node index.js"
+    "start": "semistandard; node index.js",
+    "fix" : "semistandard --fix"
   },
   "author": "",
   "license": "ISC",
@@ -15,10 +16,12 @@
     "restify": "^4.3.0"
   },
   "devDependencies": {
-    "eslint": "^3.18.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3"
+    "semistandard": "^10.0.0",
+    "standard": "^9.0.2"
+  },
+  "standard": {
+    "ignore": [
+      "/conf/**"
+    ]
   }
 }
