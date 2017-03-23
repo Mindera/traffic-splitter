@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "standard; node index.js",
+    "start": "standard && node index.js",
     "fix": "standard --fix"
   },
   "author": "",
