@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "semistandard; node index.js",
-    "fix" : "semistandard --fix"
+    "start": "standard; node index.js",
+    "fix": "standard --fix"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,6 @@
     "restify": "^4.3.0"
   },
   "devDependencies": {
-    "semistandard": "^10.0.0",
     "standard": "^9.0.2"
   },
   "standard": {
