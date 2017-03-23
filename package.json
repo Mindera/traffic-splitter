@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "standard && node index.js",
+    "fix": "standard --fix"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,13 @@
     "clone": "^2.1.1",
     "merge-descriptors": "^1.0.1",
     "restify": "^4.3.0"
+  },
+  "devDependencies": {
+    "standard": "^9.0.2"
+  },
+  "standard": {
+    "ignore": [
+      "/conf/**"
+    ]
   }
 }
