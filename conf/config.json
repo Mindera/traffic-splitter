@@ -10,7 +10,7 @@
       "keepAliveTimeout": 30000
     }
   },
-  "cors": {
+  "CORS": {
     "headers": [
         "ORIGIN",
         "X_REQUESTED_WITH",
