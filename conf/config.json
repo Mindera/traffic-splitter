@@ -10,7 +10,25 @@
       "keepAliveTimeout": 30000
     }
   },
+  "bunyan": {
+    "name": "traffic-splitter",
+    "streams": []
+  },
+  "browserId": {
+    "cookie": "bid",
+    "maxAge": 315360000,
+    "length": 12
+  },
   "CORS": {
+    "domains": [
+      "qa.tvg.com",
+      "us.betfair.com",
+      "betfair.local",
+      "dev.betfair",
+      "dev.betfair:443",
+      "dev.betfair:8443",
+      "localhost.betfair.com:8443"
+    ],
     "headers": [
         "ORIGIN",
         "X_REQUESTED_WITH",
@@ -27,22 +45,6 @@
         "PUT"
     ],
     "max-age": "600"
-  },
-  "browserId": {
-    "cookie": "bid",
-    "defaultDomain": "qa.tvg.com",
-    "domains": [
-      "qa.tvg.com",
-      "us.betfair.com",
-      "betfair.local",
-      "dev.betfair",
-      "dev.betfair:443",
-      "dev.betfair:8443",
-      "localhost.betfair.com:8443"
-    ],
-    "domain": "qa.tvg.com",
-    "maxAge": 315360000,
-    "length": 12
   },
   "circuitBreaker": {
     "enabled": true,
@@ -103,9 +105,5 @@
       },
       "priority": true
     }
-  ],
-  "bunyan": {
-    "name": "traffic-splitter",
-    "streams": []
-  }
+  ]
 }
