@@ -64,6 +64,27 @@
       "enabled": true,
       "criteria": {
         "in": {
+          "geoip": [
+            {
+              "country": "PT",
+              "region": "16",
+              "city": "Viana do Castelo"
+            },
+            {
+              "country": "PT",
+              "region": "13",
+              "city": "Porto"
+            },
+            {
+              "country": "PT",
+              "region": "08",
+              "city": "Faro"
+            }
+          ],
+          "agent": [
+            "Chrome",
+            "Mozzila"
+          ],
           "bucket": {
             "min": 50,
             "max": 90
@@ -90,9 +111,22 @@
           "geoip": [
             {
               "country": "US",
-              "region": "",
-              "city": ""
+              "region": "TX",
+              "city": "San Antonio"
+            },
+            {
+              "country": "PT",
+              "region": "03",
+              "city": "Braga"
+            },
+            {
+              "country": "PT",
+              "region": "11",
+              "city": "Lisboa"
             }
+          ],
+          "agent": [
+            "Safari"
           ]
         }
       },
