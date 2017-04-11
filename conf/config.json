@@ -86,8 +86,8 @@
             "Mozzila"
           ],
           "bucket": {
-            "min": 50,
-            "max": 90
+            "min": 0,
+            "max": 50
           },
           "host": [
             "localhost"
@@ -135,6 +135,36 @@
         "options": {
           "host": "service.tvg.com",
           "port": 80
+        }
+      },
+      "priority": true
+    },
+    {
+      "name": "SAPO",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "bucket": {
+            "min": 50,
+            "max": 100
+          },
+          "myCustomRule1": {
+            "value": 0
+          },
+          "myCustomRule2": {
+            "value": 1
+          }
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.sapo.pt",
+          "port": 80,
+          "headers": {
+            "host": "www.sapo.pt"
+          }
         }
       },
       "priority": true

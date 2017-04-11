@@ -20,7 +20,12 @@ splitter.use((server, config) => (req, res, next) => {
   return next()
 })
 
-splitter.addRule('myHost', (criteria, req) => {
+splitter.addRule('myCustomRule1', (criteria, req) => {
+  console.log(criteria)
+  return true
+})
+splitter.addRule('myCustomRule2', (criteria, req) => {
+  console.log(criteria)
   return true
 })
 
@@ -33,6 +38,9 @@ splitter.events.on('serverStart', () => {
 splitter.events.on('rulesProcessing', (duration, selectedUpstream) => {
   log.info('Event: rulesProcessing -> duration = ', duration)
   log.info('Event: rulesProcessing -> selected_upstream = ', selectedUpstream)
+})
+splitter.events.on('noUpstreamFound', (req) => {
+  log.info('Event: noUpstreamFound -> ', req.url)
 })
 splitter.events.on('resFinish', (req, res, duration) => {
   log.info('Event: resFinish -> duration = ', duration)
