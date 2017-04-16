@@ -1,12 +1,10 @@
 const fs = require('fs')
 const config = JSON.parse(fs.readFileSync('./conf/config.json'))
-const Splitter = require('./lib/splitter')
+const TrafficSplitter = require('./lib/splitter')
 
-if (!Splitter.isConfigurationValid(config)) {
-  throw new Error('My configuration is invalid!')
-}
+if (!TrafficSplitter.isConfigurationValid(config)) { throw new Error('My configuration is invalid!') }
 
-const splitter = new Splitter(config)
+const splitter = new TrafficSplitter(config)
 const log = splitter.getLogger()
 
 splitter.bootstrap((server, config) => { log.info('bootstrap_application_start') })
@@ -14,26 +12,38 @@ splitter.bootstrap((server, config) => { log.info('bootstrap_application_start_'
 splitter.bootstrap((server, config) => { log.info('bootstrap_application_start__') })
 
 splitter.use((server, config) => (req, res, next) => {
-  log.info('request_middleware')
+  log.info('requestMiddleware')
   return next()
 })
 splitter.use((server, config) => (req, res, next) => {
-  log.info('request_middleware_')
+  log.info('anotherRequestMiddleware')
   return next()
 })
 
-splitter.addRule('myHost', (criteria, req) => {
+splitter.addRule('myCustomRule1', (criteria, req) => {
+  console.log(criteria)
+  return true
+})
+splitter.addRule('myCustomRule2', (criteria, req) => {
+  console.log(criteria)
   return true
 })
 
-splitter.events.on('application_start', () => {
-  log.info('Event: application_start')
+splitter.events.on('applicationStart', () => {
+  log.info('Event: applicationStart')
 })
-splitter.events.on('server_start', () => {
-  log.info('Event: server_start')
+splitter.events.on('serverStart', () => {
+  log.info('Event: serverStart')
 })
-splitter.events.on('res_finish', (req, res, duration) => {
-  log.info('Event: res_finish -> duration = ', duration)
+splitter.events.on('rulesProcessing', (duration, selectedUpstream) => {
+  log.info('Event: rulesProcessing -> duration = ', duration)
+  log.info('Event: rulesProcessing -> selected_upstream = ', selectedUpstream)
+})
+splitter.events.on('noUpstreamFound', (req) => {
+  log.info('Event: noUpstreamFound -> ', req.url)
+})
+splitter.events.on('resFinish', (req, res, duration) => {
+  log.info('Event: resFinish -> duration = ', duration)
 })
 
 // start should only be called after adding all events, middlewares and rules
