@@ -12,6 +12,7 @@ splitter.bootstrap((server, config) => { log.info('bootstrap_application_start_'
 splitter.bootstrap((server, config) => { log.info('bootstrap_application_start__') })
 
 splitter.use((server, config) => (req, res, next) => {
+  console.log('---------------------------------------------------------------------------------------------------------------')
   log.info('requestMiddleware')
   return next()
 })
@@ -34,6 +35,7 @@ splitter.events.on('applicationStart', () => {
 })
 splitter.events.on('serverStart', () => {
   log.info('Event: serverStart')
+  for (let i = 0; i < 20; i++) { console.log('') }
 })
 splitter.events.on('rulesProcessing', (duration, selectedUpstream) => {
   log.info('Event: rulesProcessing -> duration = ', duration)

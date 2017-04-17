@@ -64,6 +64,14 @@
       "enabled": true,
       "criteria": {
         "in": {
+          "host": [
+            "localhost",
+            "www.mindera.com"
+          ],
+          "path": [
+            "/tvg",
+            "/rule"
+          ],
           "geoip": [
             {
               "country": "PT",
@@ -89,20 +97,20 @@
             "min": 0,
             "max": 50
           },
-          "host": [
-            "localhost"
-          ],
           "cookie": {
             "name": "letme",
             "value": "in"
           },
-          "path": [
-            "/tvg",
-            "/rule"
-          ],
           "visitor": false
         },
         "out": {
+          "host": [
+            "www.google.pt"
+          ],
+          "path": [
+            "/forbidden",
+            "/notallowed"
+          ],
           "device": [
             {
               "device": "tablet"
@@ -144,6 +152,10 @@
       "enabled": true,
       "criteria": {
         "in": {
+          "path": [
+            "/allowed",
+            "/enter/please"
+          ],
           "bucket": {
             "min": 50,
             "max": 100
