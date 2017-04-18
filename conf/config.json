@@ -91,7 +91,7 @@
           ],
           "agent": [
             "Chrome",
-            "Mozzila"
+            "Mozilla"
           ],
           "bucket": {
             "min": 0,
@@ -111,6 +111,10 @@
             "/forbidden",
             "/notallowed"
           ],
+          "cookie": {
+            "name": "letme",
+            "value": "out"
+          },
           "device": [
             {
               "device": "tablet"
@@ -160,6 +164,13 @@
             "min": 50,
             "max": 100
           },
+          "cookie": {
+            "name": "amIallowed",
+            "value": "yes"
+          },
+          "agent": [
+            "Opera"
+          ],
           "myCustomRule1": {
             "value": 0
           },
@@ -167,7 +178,11 @@
             "value": 1
           }
         },
-        "out": {}
+        "out": {
+          "agent": [
+            "Netscape"
+          ]
+        }
       },
       "upstream": {
         "type": "serve",
