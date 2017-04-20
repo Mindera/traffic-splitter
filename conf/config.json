@@ -80,7 +80,7 @@
             },
             {
               "country": "PT",
-              "region": "13",
+              "region": "17",
               "city": "Porto"
             },
             {
@@ -92,6 +92,27 @@
           "agent": [
             "Chrome",
             "Mozilla"
+          ],
+          "device": [
+            {
+              "device": "desktop",
+              "browser": "Firefox",
+              "version": {
+                "from": 35,
+                "to": 37
+              }
+            },
+            {
+              "device": "mobile"
+            },
+            {
+              "device": "desktop",
+              "browser": "Chrome",
+              "version": {
+                "from": 35,
+                "to": 42
+              }
+            }
           ],
           "bucket": {
             "min": 0,
@@ -115,11 +136,6 @@
             "name": "letme",
             "value": "out"
           },
-          "device": [
-            {
-              "device": "tablet"
-            }
-          ],
           "geoip": [
             {
               "country": "US",
@@ -171,6 +187,21 @@
           "agent": [
             "Opera"
           ],
+          "geoip": [
+            {
+              "country": "PT"
+            }
+          ],
+          "device": [
+            {
+              "device": "phone",
+              "browser": "Chrome",
+              "version": {
+                "from": 40,
+                "to": 42
+              }
+            }
+          ],
           "myCustomRule1": {
             "value": 0
           },
@@ -181,6 +212,11 @@
         "out": {
           "agent": [
             "Netscape"
+          ],
+          "device": [
+            {
+              "device": "tablet"
+            }
           ]
         }
       },
