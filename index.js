@@ -21,7 +21,7 @@ splitter.use((server, config) => (req, res, next) => {
   return next()
 })
 
-// overriding host rule
+// overriding splitter rule
 // splitter.addRule('host', (criteria, req) => {
 //   return true
 // })
