@@ -122,7 +122,20 @@
             "name": "letme",
             "value": "in"
           },
-          "visitor": false
+          "visitor": false,
+          "or": [
+            {
+              "cookie": {
+                "name": "secret",
+                "value": "pizza"
+              }
+            },
+            {
+              "path": [
+                "/pizza"
+              ]
+            }
+          ]
         },
         "out": {
           "host": [
@@ -156,7 +169,20 @@
           "agent": [
             "Safari"
           ],
-          "visitor": true
+          "visitor": true,
+          "and": [
+            {
+              "cookie": {
+                "name": "secret",
+                "value": "francesinha"
+              }
+            },
+            {
+              "path": [
+                "/francesinha"
+              ]
+            }
+          ]
         }
       },
       "upstream": {
@@ -207,9 +233,11 @@
           "myCustomRule1": {
             "value": 0
           },
-          "myCustomRule2": {
-            "value": 1
-          }
+          "myCustomRule2": [
+            "one",
+            "two",
+            "three"
+          ]
         },
         "out": {
           "agent": [
@@ -219,7 +247,15 @@
             {
               "device": "tablet"
             }
-          ]
+          ],
+          "myCustomRule1": {
+            "value": 1
+          },
+          "myCustomRule2": [
+            "one",
+            "three"
+          ],
+          "myError": "myError"
         }
       },
       "upstream": {

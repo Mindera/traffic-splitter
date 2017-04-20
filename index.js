@@ -21,13 +21,16 @@ splitter.use((server, config) => (req, res, next) => {
   return next()
 })
 
+// overriding host rule
+// splitter.addRule('host', (criteria, req) => {
+//   return true
+// })
 splitter.addRule('myCustomRule1', (criteria, req) => {
-  console.log(criteria)
-  return true
+  if (criteria.value === 0) { return true }
+  // return nothing to test evaluating custom rules for undefined
 })
 splitter.addRule('myCustomRule2', (criteria, req) => {
-  console.log(criteria)
-  return false
+  return criteria.indexOf('two') >= 0
 })
 
 splitter.events.on('applicationStart', () => {
