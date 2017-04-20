@@ -80,7 +80,7 @@
             },
             {
               "country": "PT",
-              "region": "17",
+              "region": "13",
               "city": "Porto"
             },
             {
@@ -155,7 +155,8 @@
           ],
           "agent": [
             "Safari"
-          ]
+          ],
+          "visitor": true
         }
       },
       "upstream": {
@@ -202,6 +203,7 @@
               }
             }
           ],
+          "visitor": "",
           "myCustomRule1": {
             "value": 0
           },

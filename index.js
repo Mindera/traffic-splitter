@@ -27,7 +27,7 @@ splitter.addRule('myCustomRule1', (criteria, req) => {
 })
 splitter.addRule('myCustomRule2', (criteria, req) => {
   console.log(criteria)
-  return true
+  return false
 })
 
 splitter.events.on('applicationStart', () => {
