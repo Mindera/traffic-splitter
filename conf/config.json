@@ -269,6 +269,89 @@
         }
       },
       "priority": true
+    },
+    {
+      "name": "vip",
+      "enabled": true,
+      "criteria": {
+        "in": {},
+        "out": {
+          "cookie": {
+            "name": "supersecret",
+            "value": "duarte"
+          }
+        }
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.torn.com",
+          "port": 80,
+          "headers": {
+            "host": "www.torn.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "path",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "path": [
+            "/superSecretPath"
+          ]
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.google.com",
+          "port": 80,
+          "headers": {
+            "host": "www.google.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "visitor",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "visitor": true
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.google.com",
+          "port": 80,
+          "headers": {
+            "host": "www.google.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "enabled": false,
+      "criteria": {
+        "in": {},
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.facebook.com",
+          "port": 80,
+          "headers": {
+            "host": "www.facebook.com"
+          }
+        }
+      }
     }
   ]
 }
