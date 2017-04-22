@@ -12,6 +12,7 @@ splitter.bootstrap((server, config) => { log.info('bootstrap_application_start_'
 splitter.bootstrap((server, config) => { log.info('bootstrap_application_start__') })
 
 splitter.use((server, config) => (req, res, next) => {
+  console.log('---------------------------------------------------------------------------------------------------------------')
   log.info('requestMiddleware')
   return next()
 })
@@ -20,13 +21,16 @@ splitter.use((server, config) => (req, res, next) => {
   return next()
 })
 
+// overriding splitter rule
+// splitter.addRule('host', (criteria, req) => {
+//   return true
+// })
 splitter.addRule('myCustomRule1', (criteria, req) => {
-  console.log(criteria)
-  return true
+  if (criteria.value === 0) { return true }
+  // return nothing to test evaluating custom rules for undefined
 })
 splitter.addRule('myCustomRule2', (criteria, req) => {
-  console.log(criteria)
-  return true
+  return criteria.indexOf('two') >= 0
 })
 
 splitter.events.on('applicationStart', () => {
@@ -34,6 +38,7 @@ splitter.events.on('applicationStart', () => {
 })
 splitter.events.on('serverStart', () => {
   log.info('Event: serverStart')
+  for (let i = 0; i < 20; i++) { console.log('') }
 })
 splitter.events.on('rulesProcessing', (duration, selectedUpstream) => {
   log.info('Event: rulesProcessing -> duration = ', duration)

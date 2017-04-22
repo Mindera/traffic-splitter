@@ -64,6 +64,14 @@
       "enabled": true,
       "criteria": {
         "in": {
+          "host": [
+            "localhost",
+            "www.mindera.com"
+          ],
+          "path": [
+            "/tvg",
+            "/rule"
+          ],
           "geoip": [
             {
               "country": "PT",
@@ -83,31 +91,64 @@
           ],
           "agent": [
             "Chrome",
-            "Mozzila"
+            "Mozilla"
+          ],
+          "device": [
+            {
+              "device": "desktop",
+              "browser": "Firefox",
+              "version": {
+                "from": 35,
+                "to": 37
+              }
+            },
+            {
+              "device": "mobile"
+            },
+            {
+              "device": "desktop",
+              "browser": "Chrome",
+              "version": {
+                "from": 35,
+                "to": 42
+              }
+            }
           ],
           "bucket": {
             "min": 0,
             "max": 50
           },
-          "host": [
-            "localhost"
-          ],
           "cookie": {
             "name": "letme",
             "value": "in"
           },
-          "path": [
-            "/tvg",
-            "/rule"
-          ],
-          "visitor": false
+          "visitor": false,
+          "or": [
+            {
+              "cookie": {
+                "name": "secret",
+                "value": "pizza"
+              }
+            },
+            {
+              "path": [
+                "/pizza"
+              ]
+            }
+          ]
         },
         "out": {
-          "device": [
-            {
-              "device": "tablet"
-            }
+          "host": [
+            "www.google.pt"
           ],
+          "path": [
+            "/forbidden",
+            "/notallowed"
+          ],
+          "cookie": {
+            "name": "letme",
+            "value": "out"
+          },
           "geoip": [
             {
               "country": "US",
@@ -127,6 +168,20 @@
           ],
           "agent": [
             "Safari"
+          ],
+          "visitor": true,
+          "and": [
+            {
+              "cookie": {
+                "name": "secret",
+                "value": "francesinha"
+              }
+            },
+            {
+              "path": [
+                "/francesinha"
+              ]
+            }
           ]
         }
       },
@@ -144,18 +199,64 @@
       "enabled": true,
       "criteria": {
         "in": {
+          "path": [
+            "/allowed",
+            "/enter/please"
+          ],
           "bucket": {
             "min": 50,
             "max": 100
           },
+          "cookie": {
+            "name": "amIallowed",
+            "value": "yes"
+          },
+          "agent": [
+            "Opera"
+          ],
+          "geoip": [
+            {
+              "country": "PT"
+            }
+          ],
+          "device": [
+            {
+              "device": "phone",
+              "browser": "Chrome",
+              "version": {
+                "from": 40,
+                "to": 42
+              }
+            }
+          ],
+          "visitor": "",
           "myCustomRule1": {
             "value": 0
           },
-          "myCustomRule2": {
-            "value": 1
-          }
+          "myCustomRule2": [
+            "one",
+            "two",
+            "three"
+          ]
         },
-        "out": {}
+        "out": {
+          "agent": [
+            "Netscape"
+          ],
+          "device": [
+            {
+              "device": "tablet"
+            }
+          ],
+          "myCustomRule1": {
+            "value": 1
+          },
+          "myCustomRule2": [
+            "one",
+            "three"
+          ],
+          "myError": "myError"
+        }
       },
       "upstream": {
         "type": "serve",
@@ -168,6 +269,89 @@
         }
       },
       "priority": true
+    },
+    {
+      "name": "vip",
+      "enabled": true,
+      "criteria": {
+        "in": {},
+        "out": {
+          "cookie": {
+            "name": "supersecret",
+            "value": "duarte"
+          }
+        }
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.torn.com",
+          "port": 80,
+          "headers": {
+            "host": "www.torn.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "path",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "path": [
+            "/superSecretPath"
+          ]
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.google.com",
+          "port": 80,
+          "headers": {
+            "host": "www.google.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "visitor",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "visitor": true
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.google.com",
+          "port": 80,
+          "headers": {
+            "host": "www.google.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "enabled": false,
+      "criteria": {
+        "in": {},
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.facebook.com",
+          "port": 80,
+          "headers": {
+            "host": "www.facebook.com"
+          }
+        }
+      }
     }
   ]
 }
