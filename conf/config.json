@@ -27,7 +27,8 @@
       "dev.betfair",
       "dev.betfair:443",
       "dev.betfair:8443",
-      "localhost.betfair.com:8443"
+      "localhost.betfair.com:8443",
+      "bjgbiflinjbdggehcddcbncdddomop"
     ],
     "headers": [
         "ORIGIN",
@@ -254,8 +255,7 @@
           "myCustomRule2": [
             "one",
             "three"
-          ],
-          "myError": "myError"
+          ]
         }
       },
       "upstream": {
@@ -288,7 +288,18 @@
           "host": "www.torn.com",
           "port": 80,
           "headers": {
-            "host": "www.torn.com"
+            "host": "www.torn.com",
+            "X-Access-Token": "randomToken",
+            "X-Access-ID": "randomID"
+          },
+          "rewrite": ["(.*)", "/profiles.php?XID=840859"],
+          "cookies": {
+              "duarte": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "mendes"
+              }
           }
         }
       }

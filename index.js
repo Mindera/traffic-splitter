@@ -28,6 +28,7 @@ splitter.use((server, config) => (req, res, next) => {
 splitter.addRule('myCustomRule1', (criteria, req) => {
   if (criteria.value === 0) { return true }
   // return nothing to test evaluating custom rules for undefined
+  return false
 })
 splitter.addRule('myCustomRule2', (criteria, req) => {
   return criteria.indexOf('two') >= 0
