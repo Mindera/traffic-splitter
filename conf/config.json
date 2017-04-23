@@ -292,13 +292,28 @@
             "X-Access-Token": "randomToken",
             "X-Access-ID": "randomID"
           },
-          "rewrite": ["(.*)", "/profiles.php?XID=840859"],
+          "rewrite": {
+            "expression": "(.*)",
+            "to": "/profiles.php?XID=840859"
+          },
           "cookies": {
-              "duarte": {
+              "name": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "duarte"
+              },
+              "surname": {
                   "maxAge": 600000,
                   "domain": "localhost",
                   "path": "/",
                   "value": "mendes"
+              },
+              "age": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "22"
               }
           }
         }
@@ -342,6 +357,20 @@
           "port": 80,
           "headers": {
             "host": "www.google.com"
+          },
+          "cookies": {
+              "name": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "guest"
+              },
+              "age": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "0"
+              }
           }
         }
       }
