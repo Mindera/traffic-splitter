@@ -17,7 +17,7 @@ splitter.use((server, config) => (req, res, next) => {
   return next()
 })
 splitter.use((server, config) => (req, res, next) => {
-  log.info('anotherRequestMiddleware')
+  log.info(`Request URL = ${req.url}`)
   return next()
 })
 
@@ -50,6 +50,12 @@ splitter.events.on('noUpstreamFound', (req) => {
 })
 splitter.events.on('resFinish', (req, res, duration) => {
   log.info('Event: resFinish -> duration = ', duration)
+})
+splitter.events.on('serving', (statusCode, upstream, duration) => {
+  log.info('Event: serving -> statusCode = ', statusCode)
+})
+splitter.events.on('servingError', (err, upstream, duration) => {
+  log.info('Event: servingError -> err = ', err)
 })
 
 // start should only be called after adding all events, middlewares and rules

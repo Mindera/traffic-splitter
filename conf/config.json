@@ -274,7 +274,12 @@
       "name": "vip",
       "enabled": true,
       "criteria": {
-        "in": {},
+        "in": {
+          "bucket": {
+            "min": 50,
+            "max": 100
+          }
+        },
         "out": {
           "cookie": {
             "name": "supersecret",
@@ -285,16 +290,16 @@
       "upstream": {
         "type": "serve",
         "options": {
-          "host": "www.torn.com",
+          "host": "www.sapo.pt",
           "port": 80,
           "headers": {
-            "host": "www.torn.com",
+            "host": "www.sapo.pt",
             "X-Access-Token": "randomToken",
             "X-Access-ID": "randomID"
           },
           "rewrite": {
             "expression": "(.*)",
-            "to": "/profiles.php?XID=840859"
+            "to": "/noticias/atualidade"
           },
           "cookies": {
               "name": {
