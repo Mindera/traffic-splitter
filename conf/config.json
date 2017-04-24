@@ -28,6 +28,7 @@
       "dev.betfair:443",
       "dev.betfair:8443",
       "localhost.betfair.com:8443",
+      "localhost",
       "bjgbiflinjbdggehcddcbncdddomop"
     ],
     "headers": [
