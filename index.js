@@ -51,8 +51,8 @@ splitter.events.on('noUpstreamFound', (req) => {
 splitter.events.on('resFinish', (req, res, duration) => {
   log.info('Event: resFinish -> duration = ', duration)
 })
-splitter.events.on('serving', (statusCode, upstream, duration) => {
-  log.info('Event: serving -> statusCode = ', statusCode)
+splitter.events.on('serving', (statusCode, upstream, duration, host) => {
+  log.info(`Event: serving -> ${host} responded with code ${statusCode} in ${duration} ms`)
 })
 splitter.events.on('servingError', (err, upstream, duration) => {
   log.info('Event: servingError -> err = ', err)
