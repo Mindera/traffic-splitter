@@ -1,5 +1,4 @@
-const fs = require('fs')
-const config = JSON.parse(fs.readFileSync('./conf/config.json'))
+const config = JSON.parse(require('fs').readFileSync('./conf/config.json'))
 const TrafficSplitter = require('./lib/splitter')
 
 if (!TrafficSplitter.isConfigurationValid(config)) { throw new Error('My configuration is invalid!') }
@@ -56,6 +55,18 @@ splitter.events.on('serving', (statusCode, upstream, duration, host) => {
 })
 splitter.events.on('servingError', (err, upstream, duration) => {
   log.info('Event: servingError -> err = ', err)
+})
+splitter.events.on('upstreamException', (exception, upstream) => {
+  log.info('Event: upstreamException -> exception = ', exception)
+})
+splitter.events.on('httpSocketMetrics', agentStatus => {
+  // log.info('Event: httpSocketMetrics -> agentStatus = ', agentStatus)
+})
+splitter.events.on('httpsSocketMetrics', agentStatus => {
+  // log.info('Event: httpsSocketMetrics -> agentStatus = ', agentStatus)
+})
+splitter.events.on('redirecting', (statusCode, upstream, duration) => {
+  log.info(`Event: redirecting -> duration = ${duration}`)
 })
 
 // start should only be called after adding all events, middlewares and rules

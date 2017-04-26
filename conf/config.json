@@ -8,6 +8,10 @@
       "maxFreeSockets": 64,
       "timeout": 60000,
       "keepAliveTimeout": 30000
+    },
+    "emitMetricsInterval": {
+      "http": 10000,
+      "https": 10000
     }
   },
   "bunyan": {
@@ -326,23 +330,64 @@
       }
     },
     {
-      "name": "path",
+      "name": "https",
       "enabled": "true",
       "criteria": {
         "in": {
+          "bucket": {
+            "min": 0,
+            "max": 100
+          },
           "path": [
-            "/superSecretPath"
+            "/https"
           ]
         },
         "out": {}
       },
       "upstream": {
-        "type": "serve",
+        "type": "serveHTTPS",
         "options": {
-          "host": "www.google.com",
+          "host": "www.npmjs.com",
           "port": 80,
           "headers": {
-            "host": "www.google.com"
+            "host": "www.npmjs.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "redirect",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "bucket": {
+            "min": 0,
+            "max": 100
+          },
+          "path": [
+            "/redirect"
+          ]
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "redirect",
+        "options": {
+          "location": "http://mindera.com/",
+          "statusCode": 302,
+          "cookies": {
+              "redirected": {
+                  "maxAge": 600000,
+                  "domain": "http://mindera.com/",
+                  "path": "/",
+                  "value": "hell yeah"
+              },
+              "mindera": {
+                  "maxAge": 600000,
+                  "domain": "http://mindera.com/",
+                  "path": "/",
+                  "value": "rocks"
+              }
           }
         }
       }
