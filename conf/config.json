@@ -339,16 +339,16 @@
             "max": 100
           },
           "path": [
-            "/https"
+            "/package"
           ]
         },
         "out": {}
       },
       "upstream": {
-        "type": "serveHTTPS",
+        "type": "serveSecure",
         "options": {
           "host": "www.npmjs.com",
-          "port": 80,
+          "port": 443,
           "headers": {
             "host": "www.npmjs.com"
           }

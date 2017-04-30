@@ -60,10 +60,10 @@ splitter.events.on('upstreamException', (exception, upstream) => {
   log.info('Event: upstreamException -> exception = ', exception)
 })
 splitter.events.on('httpSocketMetrics', agentStatus => {
-  // log.info('Event: httpSocketMetrics -> agentStatus = ', agentStatus)
+  log.info('Event: httpSocketMetrics -> agentStatus = ', agentStatus)
 })
 splitter.events.on('httpsSocketMetrics', agentStatus => {
-  // log.info('Event: httpsSocketMetrics -> agentStatus = ', agentStatus)
+  log.info('Event: httpsSocketMetrics -> agentStatus = ', agentStatus)
 })
 splitter.events.on('redirecting', (statusCode, upstream, duration) => {
   log.info(`Event: redirecting -> duration = ${duration}`)
