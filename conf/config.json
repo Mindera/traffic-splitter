@@ -23,18 +23,18 @@
     "maxAge": 315360000,
     "length": 12
   },
+  "domains": [
+    "qa.tvg.com",
+    "us.betfair.com",
+    "betfair.local",
+    "dev.betfair",
+    "dev.betfair:443",
+    "dev.betfair:8443",
+    "localhost.betfair.com:8443",
+    "localhost",
+    "bjgbiflinjbdggehcddcbncdddomop"
+  ],
   "CORS": {
-    "domains": [
-      "qa.tvg.com",
-      "us.betfair.com",
-      "betfair.local",
-      "dev.betfair",
-      "dev.betfair:443",
-      "dev.betfair:8443",
-      "localhost.betfair.com:8443",
-      "localhost",
-      "bjgbiflinjbdggehcddcbncdddomop"
-    ],
     "headers": [
         "ORIGIN",
         "X_REQUESTED_WITH",
