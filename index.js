@@ -1,5 +1,4 @@
-const fs = require('fs')
-const config = JSON.parse(fs.readFileSync('./conf/config.json'))
+const config = JSON.parse(require('fs').readFileSync('./conf/config.json'))
 const TrafficSplitter = require('./lib/splitter')
 
 if (!TrafficSplitter.isConfigurationValid(config)) { throw new Error('My configuration is invalid!') }
@@ -17,7 +16,7 @@ splitter.use((server, config) => (req, res, next) => {
   return next()
 })
 splitter.use((server, config) => (req, res, next) => {
-  log.info('anotherRequestMiddleware')
+  log.info(`Request URL = ${req.url}`)
   return next()
 })
 
@@ -28,6 +27,7 @@ splitter.use((server, config) => (req, res, next) => {
 splitter.addRule('myCustomRule1', (criteria, req) => {
   if (criteria.value === 0) { return true }
   // return nothing to test evaluating custom rules for undefined
+  return false
 })
 splitter.addRule('myCustomRule2', (criteria, req) => {
   return criteria.indexOf('two') >= 0
@@ -49,6 +49,24 @@ splitter.events.on('noUpstreamFound', (req) => {
 })
 splitter.events.on('resFinish', (req, res, duration) => {
   log.info('Event: resFinish -> duration = ', duration)
+})
+splitter.events.on('serving', (statusCode, upstream, duration, host) => {
+  log.info(`Event: serving -> ${host} responded with code ${statusCode} in ${duration} ms`)
+})
+splitter.events.on('servingError', (err, upstream, duration) => {
+  log.info('Event: servingError -> err = ', err)
+})
+splitter.events.on('upstreamException', (exception, upstream) => {
+  log.info('Event: upstreamException -> exception = ', exception)
+})
+splitter.events.on('httpSocketMetrics', agentStatus => {
+  log.info('Event: httpSocketMetrics -> agentStatus = ', agentStatus)
+})
+splitter.events.on('httpsSocketMetrics', agentStatus => {
+  log.info('Event: httpsSocketMetrics -> agentStatus = ', agentStatus)
+})
+splitter.events.on('redirecting', (statusCode, upstream, duration) => {
+  log.info(`Event: redirecting -> duration = ${duration}`)
 })
 
 // start should only be called after adding all events, middlewares and rules
