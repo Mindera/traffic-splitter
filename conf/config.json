@@ -197,8 +197,7 @@
           "host": "service.tvg.com",
           "port": 80
         }
-      },
-      "priority": true
+      }
     },
     {
       "name": "SAPO",
@@ -272,61 +271,6 @@
             "host": "www.sapo.pt"
           }
         }
-      },
-      "priority": true
-    },
-    {
-      "name": "vip",
-      "enabled": true,
-      "criteria": {
-        "in": {
-          "bucket": {
-            "min": 50,
-            "max": 100
-          }
-        },
-        "out": {
-          "cookie": {
-            "name": "supersecret",
-            "value": "duarte"
-          }
-        }
-      },
-      "upstream": {
-        "type": "serve",
-        "options": {
-          "host": "www.sapo.pt",
-          "port": 80,
-          "headers": {
-            "host": "www.sapo.pt",
-            "X-Access-Token": "randomToken",
-            "X-Access-ID": "randomID"
-          },
-          "rewrite": {
-            "expression": "(.*)",
-            "to": "/noticias/atualidade"
-          },
-          "cookies": {
-              "name": {
-                  "maxAge": 600000,
-                  "domain": "localhost",
-                  "path": "/",
-                  "value": "duarte"
-              },
-              "surname": {
-                  "maxAge": 600000,
-                  "domain": "localhost",
-                  "path": "/",
-                  "value": "mendes"
-              },
-              "age": {
-                  "maxAge": 600000,
-                  "domain": "localhost",
-                  "path": "/",
-                  "value": "22"
-              }
-          }
-        }
       }
     },
     {
@@ -368,7 +312,12 @@
             "/redirect"
           ]
         },
-        "out": {}
+        "out": {
+          "host": [
+            "www.trafficsplitter.io",
+            "www.npmjs.com/package/trafficsplitter"
+          ]
+        }
       },
       "upstream": {
         "type": "redirect",
@@ -387,6 +336,64 @@
                   "domain": "http://mindera.com/",
                   "path": "/",
                   "value": "rocks"
+              }
+          }
+        }
+      }
+    },
+    {
+      "name": "vip",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "bucket": {
+            "min": 50,
+            "max": 100
+          },
+          "cookie": {
+            "name": "letme",
+            "value": "in"
+          }
+        },
+        "out": {
+          "cookie": {
+            "name": "supersecret",
+            "value": "duarte"
+          }
+        }
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.google.pt",
+          "port": 80,
+          "headers": {
+            "host": "www.google.pt",
+            "X-Access-Token": "randomToken",
+            "X-Access-ID": "randomID"
+          },
+          "rewrite": {
+            "expression": "(.*)",
+            "to": "/noticias/atualidade"
+          },
+          "cookies": {
+              "name": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "duarte"
+              },
+              "surname": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "mendes"
+              },
+              "age": {
+                  "maxAge": 600000,
+                  "domain": "localhost",
+                  "path": "/",
+                  "value": "22"
               }
           }
         }
