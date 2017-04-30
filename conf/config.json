@@ -64,7 +64,51 @@
     "errorCode": "503",
     "errorMessage": "Server is temporarily at capacity"
   },
+  "rulesets": {
+    "first": {
+      "cookie": [
+        {
+          "name": "step",
+          "value": "in"
+        }
+      ]
+    },
+    "second": {
+      "cookie": [
+        {
+          "name": "step",
+          "value": "out"
+        }
+      ]
+    }
+  },
   "upstreams": [
+    {
+      "name": "rules",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "ruleset": [
+            "first"
+          ]
+        },
+        "out": {
+          "ruleset": [
+            "second"
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.youtube.com",
+          "port": 443,
+          "headers": {
+            "host": "www.youtube.com"
+          }
+        }
+      }
+    },
     {
       "name": "cookies",
       "enabled": true,
