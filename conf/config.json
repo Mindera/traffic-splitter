@@ -95,6 +95,9 @@
         "out": {
           "ruleset": [
             "second"
+          ],
+          "path": [
+            "/redirect"
           ]
         }
       },
