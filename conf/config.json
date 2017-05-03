@@ -64,6 +64,10 @@
     "errorCode": "503",
     "errorMessage": "Server is temporarily at capacity"
   },
+  "pathRegExp": {
+    "prefix": "^",
+    "sufix": "([/?].*)?$"
+  },
   "rulesets": {
     "first": {
       "cookie": [
@@ -83,6 +87,51 @@
     }
   },
   "upstreams": [
+    {
+      "name": "paths",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "path": [
+            "/teste"
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.torn.com",
+          "port": 443,
+          "headers": {
+            "host": "www.torn.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "devices",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "device": [
+            {
+              "device": "phone",
+              "type": "Sony"
+            }
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.torn.com",
+          "port": 443,
+          "headers": {
+            "host": "www.torn.com"
+          }
+        }
+      }
+    },
     {
       "name": "rules",
       "enabled": true,
