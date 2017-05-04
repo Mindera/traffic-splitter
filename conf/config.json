@@ -23,18 +23,18 @@
     "maxAge": 315360000,
     "length": 12
   },
+  "domains": [
+    "qa.tvg.com",
+    "us.betfair.com",
+    "betfair.local",
+    "dev.betfair",
+    "dev.betfair:443",
+    "dev.betfair:8443",
+    "localhost.betfair.com:8443",
+    "localhost",
+    "bjgbiflinjbdggehcddcbncdddomop"
+  ],
   "CORS": {
-    "domains": [
-      "qa.tvg.com",
-      "us.betfair.com",
-      "betfair.local",
-      "dev.betfair",
-      "dev.betfair:443",
-      "dev.betfair:8443",
-      "localhost.betfair.com:8443",
-      "localhost",
-      "bjgbiflinjbdggehcddcbncdddomop"
-    ],
     "headers": [
         "ORIGIN",
         "X_REQUESTED_WITH",
@@ -64,7 +64,136 @@
     "errorCode": "503",
     "errorMessage": "Server is temporarily at capacity"
   },
+  "pathRegExp": {
+    "prefix": "^",
+    "sufix": "([/?].*)?$"
+  },
+  "rulesets": {
+    "first": {
+      "cookie": [
+        {
+          "name": "step",
+          "value": "in"
+        }
+      ]
+    },
+    "second": {
+      "cookie": [
+        {
+          "name": "step",
+          "value": "out"
+        }
+      ]
+    }
+  },
   "upstreams": [
+    {
+      "name": "paths",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "path": [
+            "/teste"
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.torn.com",
+          "port": 443,
+          "headers": {
+            "host": "www.torn.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "devices",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "device": [
+            {
+              "device": "phone",
+              "type": "Sony"
+            }
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.torn.com",
+          "port": 443,
+          "headers": {
+            "host": "www.torn.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "rules",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "ruleset": [
+            "first"
+          ]
+        },
+        "out": {
+          "ruleset": [
+            "second"
+          ],
+          "path": [
+            "/redirect"
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.youtube.com",
+          "port": 443,
+          "headers": {
+            "host": "www.youtube.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "cookies",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "cookie": [
+            {
+              "name": "olx",
+              "value": "se vale x, olx!"
+            },
+            {
+              "name": "oly",
+              "value": "se vale y, oly!"
+            },
+            {
+              "name": "olz",
+              "value": "se vale z, olz!"
+            }
+          ]
+        },
+        "out": {}
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "www.olx.pt",
+          "port": 80,
+          "headers": {
+            "host": "www.olx.pt"
+          }
+        }
+      }
+    },
     {
       "name": "TVG",
       "enabled": true,
@@ -120,21 +249,31 @@
               }
             }
           ],
-          "bucket": {
-            "min": 0,
-            "max": 50
-          },
-          "cookie": {
-            "name": "letme",
-            "value": "in"
-          },
+          "bucket": [
+            {
+              "min": 0,
+              "max": 50
+            }
+          ],
+          "cookie": [
+            {
+              "name": "letme",
+              "value": "in"
+            },
+            {
+              "name": "keepme",
+              "value": "in"
+            }
+          ],
           "visitor": false,
           "or": [
             {
-              "cookie": {
-                "name": "secret",
-                "value": "pizza"
-              }
+              "cookie": [
+                {
+                  "name": "secret",
+                  "value": "pizza"
+                }
+              ]
             },
             {
               "path": [
@@ -151,10 +290,12 @@
             "/forbidden",
             "/notallowed"
           ],
-          "cookie": {
-            "name": "letme",
-            "value": "out"
-          },
+          "cookie": [
+            {
+              "name": "letme",
+              "value": "out"
+            }
+          ],
           "geoip": [
             {
               "country": "US",
@@ -178,10 +319,12 @@
           "visitor": true,
           "and": [
             {
-              "cookie": {
-                "name": "secret",
-                "value": "francesinha"
-              }
+              "cookie": [
+                {
+                  "name": "secret",
+                  "value": "francesinha"
+                }
+              ]
             },
             {
               "path": [
@@ -197,8 +340,7 @@
           "host": "service.tvg.com",
           "port": 80
         }
-      },
-      "priority": true
+      }
     },
     {
       "name": "SAPO",
@@ -209,14 +351,18 @@
             "/allowed",
             "/enter/please"
           ],
-          "bucket": {
-            "min": 50,
-            "max": 100
-          },
-          "cookie": {
-            "name": "amIallowed",
-            "value": "yes"
-          },
+          "bucket": [
+            {
+              "min": 50,
+              "max": 100
+            }
+          ],
+          "cookie": [
+            {
+              "name": "amIallowed",
+              "value": "yes"
+            }
+          ],
           "agent": [
             "Opera"
           ],
@@ -272,33 +418,126 @@
             "host": "www.sapo.pt"
           }
         }
+      }
+    },
+    {
+      "name": "https",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "bucket": [
+            {
+              "min": 0,
+              "max": 100
+            }
+          ],
+          "path": [
+            "/package"
+          ]
+        },
+        "out": {}
       },
-      "priority": true
+      "upstream": {
+        "type": "serveSecure",
+        "options": {
+          "host": "www.npmjs.com",
+          "port": 443,
+          "headers": {
+            "host": "www.npmjs.com"
+          }
+        }
+      }
+    },
+    {
+      "name": "redirect",
+      "enabled": "true",
+      "criteria": {
+        "in": {
+          "bucket": [
+            {
+              "min": 0,
+              "max": 10
+            },
+            {
+              "min": 10,
+              "max": 30
+            },
+            {
+              "min": 40,
+              "max": 70
+            },
+            {
+              "min": 70,
+              "max": 90
+            }
+          ],
+          "path": [
+            "/redirect"
+          ]
+        },
+        "out": {
+          "host": [
+            "www.trafficsplitter.io",
+            "www.npmjs.com/package/trafficsplitter"
+          ]
+        }
+      },
+      "upstream": {
+        "type": "redirect",
+        "options": {
+          "location": "http://mindera.com/",
+          "statusCode": 302,
+          "cookies": {
+              "redirected": {
+                  "maxAge": 600000,
+                  "domain": "http://mindera.com/",
+                  "path": "/",
+                  "value": "hell yeah"
+              },
+              "mindera": {
+                  "maxAge": 600000,
+                  "domain": "http://mindera.com/",
+                  "path": "/",
+                  "value": "rocks"
+              }
+          }
+        }
+      }
     },
     {
       "name": "vip",
       "enabled": true,
       "criteria": {
         "in": {
-          "bucket": {
-            "min": 50,
-            "max": 100
-          }
+          "bucket": [
+            {
+              "min": 50,
+              "max": 100
+            }
+          ],
+          "cookie": [
+            {
+              "name": "letme",
+              "value": "in"
+            }
+          ]
         },
         "out": {
-          "cookie": {
-            "name": "supersecret",
-            "value": "duarte"
-          }
+          "cookie": [
+            {
+              "name": "supersecret",
+              "value": "duarte"
+            }
+          ]
         }
       },
       "upstream": {
         "type": "serve",
         "options": {
-          "host": "www.sapo.pt",
+          "host": "www.google.pt",
           "port": 80,
           "headers": {
-            "host": "www.sapo.pt",
+            "host": "www.google.pt",
             "X-Access-Token": "randomToken",
             "X-Access-ID": "randomID"
           },
@@ -324,69 +563,6 @@
                   "domain": "localhost",
                   "path": "/",
                   "value": "22"
-              }
-          }
-        }
-      }
-    },
-    {
-      "name": "https",
-      "enabled": "true",
-      "criteria": {
-        "in": {
-          "bucket": {
-            "min": 0,
-            "max": 100
-          },
-          "path": [
-            "/package"
-          ]
-        },
-        "out": {}
-      },
-      "upstream": {
-        "type": "serveSecure",
-        "options": {
-          "host": "www.npmjs.com",
-          "port": 443,
-          "headers": {
-            "host": "www.npmjs.com"
-          }
-        }
-      }
-    },
-    {
-      "name": "redirect",
-      "enabled": "true",
-      "criteria": {
-        "in": {
-          "bucket": {
-            "min": 0,
-            "max": 100
-          },
-          "path": [
-            "/redirect"
-          ]
-        },
-        "out": {}
-      },
-      "upstream": {
-        "type": "redirect",
-        "options": {
-          "location": "http://mindera.com/",
-          "statusCode": 302,
-          "cookies": {
-              "redirected": {
-                  "maxAge": 600000,
-                  "domain": "http://mindera.com/",
-                  "path": "/",
-                  "value": "hell yeah"
-              },
-              "mindera": {
-                  "maxAge": 600000,
-                  "domain": "http://mindera.com/",
-                  "path": "/",
-                  "value": "rocks"
               }
           }
         }
