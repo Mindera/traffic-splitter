@@ -224,10 +224,6 @@
               "city": "Faro"
             }
           ],
-          "agent": [
-            "Chrome",
-            "Mozilla"
-          ],
           "device": [
             {
               "device": "desktop",
@@ -278,6 +274,12 @@
             {
               "path": [
                 "/pizza"
+              ]
+            },
+            {
+              "agent": [
+                "Chrome",
+                "Mozilla"
               ]
             }
           ]
