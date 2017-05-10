@@ -282,8 +282,7 @@
             },
             {
               "agent": [
-                "Chrome",
-                "Mozilla"
+                "Chrome"
               ]
             }
           ]
