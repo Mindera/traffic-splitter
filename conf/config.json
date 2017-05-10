@@ -12,6 +12,10 @@
     "emitMetricsInterval": {
       "http": 10000,
       "https": 10000
+    },
+    "performance": {
+      "logSlowRequests": true,
+      "slowRequestThreshold": 1000
     }
   },
   "bunyan": {
