@@ -92,6 +92,13 @@
   },
   "upstreams": [
     {
+      "name": "empty",
+      "enabled": false,
+      "upstream": {
+        "type": "serve"
+      }
+    },
+    {
       "name": "paths",
       "enabled": true,
       "criteria": {

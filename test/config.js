@@ -47,7 +47,8 @@ const rulesets = {
   }
 }
 
-const firstUp = {
+let firstUp = {
+  enabled: true,
   criteria: {
     in: {
       ruleset: ['first', 'third']
@@ -57,22 +58,30 @@ const firstUp = {
     }
   },
   upstream: {
-    type: 'serve'
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com'
+    }
   }
 }
 
-const secondUp = {
+let secondUp = {
+  enabled: true,
   criteria: {
     in: {
       ruleset: ['second', 'third']
     }
   },
   upstream: {
-    type: 'serve'
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com'
+    }
   }
 }
 
-const thirdUp = {
+let thirdUp = {
+  enabled: true,
   criteria: {
     in: {
       ruleset: ['second', 'third'],
@@ -80,11 +89,15 @@ const thirdUp = {
     }
   },
   upstream: {
-    type: 'serve'
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com'
+    }
   }
 }
 
-const fourthUp = {
+let fourthUp = {
+  enabled: true,
   criteria: {
     in: {
       and: [
@@ -114,17 +127,25 @@ const fourthUp = {
     }
   },
   upstream: {
-    type: 'serve'
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com'
+    }
   }
 }
 
-const fifthUp = {
+let fifthUp = {
+  enabled: true,
   upstream: {
-    type: 'serve'
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com'
+    }
   }
 }
 
-const sixthUp = {
+let sixthUp = {
+  enabled: true,
   criteria: {
     in: {
       geoip: geoips,
@@ -133,73 +154,82 @@ const sixthUp = {
     }
   },
   upstream: {
-    type: 'serve'
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com'
+    }
   }
 }
 
-let upstreams
+const getOptimizedUpstream = (upstream) => config.getOptimizedUpstreams({
+  pathRegExp: {
+    prefix: '^',
+    sufix: '([/?].*)?$'
+  },
+  rulesets,
+  upstreams: [upstream]
+})[0]
+
 before(() => {
-  upstreams = config.getOptimizedUpstreams({
-    pathRegExp: {
-      prefix: '^',
-      sufix: '([/?].*)?$'
-    },
-    rulesets,
-    upstreams: [firstUp, secondUp, thirdUp, fourthUp, fifthUp, sixthUp]
-  })
+  firstUp = getOptimizedUpstream(firstUp)
+  secondUp = getOptimizedUpstream(secondUp)
+  thirdUp = getOptimizedUpstream(thirdUp)
+  fourthUp = getOptimizedUpstream(fourthUp)
+  fifthUp = getOptimizedUpstream(fifthUp)
+  sixthUp = getOptimizedUpstream(sixthUp)
 })
 
 describe('Evaluate configuration optimization', () => {
   describe('Evaluate rulesets concatenation', () => {
     describe('Evaluate elimination of ruleset property', () => {
       it('Should not have property in criteria.in', () => {
-        expect(upstreams[0]).to.not.have.deep.property('criteria.in.ruleset')
+        expect(firstUp).to.not.have.deep.property('criteria.in.ruleset')
       })
 
       it('Should not have property in criteria.out', () => {
-        expect(upstreams[0]).to.not.have.deep.property('criteria.out.ruleset')
+        expect(firstUp).to.not.have.deep.property('criteria.out.ruleset')
       })
     })
 
 
     describe('Evaluate addition of rules to criteria', () => {
       it('Should add rules to criteria in', () => {
-        expect(upstreams[0]).to.have.deep.property('criteria.in.cookie')
+        expect(firstUp).to.have.deep.property('criteria.in.cookie')
           .and.equal(rulesets.first.cookie)
 
         // remember that paths are transformed into a regex
-        expect(upstreams[0]).to.have.deep.property('criteria.in.path')
+        expect(firstUp).to.have.deep.property('criteria.in.path')
           .and.not.equal(rulesets.first.path)
 
-        expect(upstreams[0]).to.have.deep.property('criteria.in.bucket')
+        expect(firstUp).to.have.deep.property('criteria.in.bucket')
           .and.equal(rulesets.first.bucket)
 
         // remember that agents are transformed into a regex
-        expect(upstreams[0]).to.have.deep.property('criteria.in.agent')
+        expect(firstUp).to.have.deep.property('criteria.in.agent')
           .and.not.equal(rulesets.third.agent)
       })
 
       it('Should add rules to criteria out', () => {
-        expect(upstreams[0]).to.have.deep.property('criteria.out.cookie')
+        expect(firstUp).to.have.deep.property('criteria.out.cookie')
           .and.equal(rulesets.second.cookie)
 
         // remember that agents are transformed into a regex
-        expect(upstreams[0]).to.have.deep.property('criteria.out.agent')
+        expect(firstUp).to.have.deep.property('criteria.out.agent')
           .and.not.equal(rulesets.second.agent)
 
-        expect(upstreams[0]).to.have.deep.property('criteria.out.bucket')
+        expect(firstUp).to.have.deep.property('criteria.out.bucket')
           .and.equal(rulesets.second.bucket)
       })
     })
 
     describe('Evaluate properties overriding', () => {
       it('Should have property from last ruleset', () => {
-        expect(upstreams[1]).to.have.deep.property('criteria.in.agent')
+        expect(secondUp).to.have.deep.property('criteria.in.agent')
           .and.to.have.lengthOf(1)
       })
 
       it('Should keep property from own criteria and not override from ruleset', () => {
-        expect(upstreams[2]).to.have.deep.property('criteria.in.agent')
+        expect(thirdUp).to.have.deep.property('criteria.in.agent')
           .and.to.have.lengthOf(3)
       })
     })
@@ -207,28 +237,28 @@ describe('Evaluate configuration optimization', () => {
 
   describe('Evaluate optimization of properties inside operators', () => {
     describe('Evaluate operator AND', () => {
-      it('Should have property path and be optimized', () => {
-        expect(upstreams[3]).to.have.deep.property('criteria.in.and[0].path')
+      it('Should have properties and be optimized', () => {
+        expect(fourthUp).to.have.deep.property('criteria.in.and[0].path')
           .and.to.have.lengthOf(paths.length)
           .and.not.equal(paths)
       })
 
-      it('Should have property OR and have property path and be optimized', () => {
-        expect(upstreams[3]).to.have.deep.property('criteria.in.and[1].or[0].path')
+      it('Should have operator and have properties optimized', () => {
+        expect(fourthUp).to.have.deep.property('criteria.in.and[1].or[0].path')
           .and.to.have.lengthOf(paths.length)
           .and.not.equal(paths)
       })
     })
 
     describe('Evaluate operator OR', () => {
-      it('Should have property path and be optimized', () => {
-        expect(upstreams[3]).to.have.deep.property('criteria.in.or[0].path')
+      it('Should have properties and be optimized', () => {
+        expect(fourthUp).to.have.deep.property('criteria.in.or[0].path')
           .and.to.have.lengthOf(paths.length)
           .and.not.equal(paths)
       })
 
-      it('Should have property AND and have property path and be optimized', () => {
-        expect(upstreams[3]).to.have.deep.property('criteria.in.or[1].and[0].path')
+      it('Should have operator and have properties optimized', () => {
+        expect(fourthUp).to.have.deep.property('criteria.in.or[1].and[0].path')
           .and.to.have.lengthOf(paths.length)
           .and.not.equal(paths)
       })
@@ -237,36 +267,36 @@ describe('Evaluate configuration optimization', () => {
 
   describe('Evaluate upstream without criteria', () => {
     it('Should have criteria property', () => {
-      expect(upstreams[4]).to.have.property('criteria')
+      expect(fifthUp).to.have.property('criteria')
         .and.to.not.be.undefined
     })
 
     it('Should have criteria.in property and be undefined', () => {
-      expect(upstreams[4]).to.have.deep.property('criteria.in')
+      expect(fifthUp).to.have.deep.property('criteria.in')
         .and.to.be.undefined
     })
 
     it('Should have criteria.out property and be undefined', () => {
-      expect(upstreams[4]).to.have.deep.property('criteria.out')
+      expect(fifthUp).to.have.deep.property('criteria.out')
         .and.to.be.undefined
     })
   })
 
   describe('Evaluate properties optimizations', () => {
     it('Should have property geoip and same length but be different', () => {
-      expect(upstreams[5]).to.have.deep.property('criteria.in.geoip')
+      expect(sixthUp).to.have.deep.property('criteria.in.geoip')
         .and.to.have.lengthOf(geoips.length)
         .and.not.equal(geoips)
     })
 
     it('Should have property agent and same length but be different', () => {
-      expect(upstreams[5]).to.have.deep.property('criteria.in.agent')
+      expect(sixthUp).to.have.deep.property('criteria.in.agent')
         .and.to.have.lengthOf(agents.length)
         .and.not.equal(agents)
     })
 
     it('Should have property path and same length but be different', () => {
-      expect(upstreams[5]).to.have.deep.property('criteria.in.path')
+      expect(sixthUp).to.have.deep.property('criteria.in.path')
         .and.to.have.lengthOf(paths.length)
         .and.not.equal(paths)
     })
