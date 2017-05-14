@@ -163,48 +163,32 @@ describe('Evaluate configuration optimization', () => {
 
 
     describe('Evaluate addition of rules to criteria', () => {
-      describe('Evaluate first ruleset', () => {
-        it('Should have cookies and be the same', () => {
-          expect(upstreams[0]).to.have.deep.property('criteria.in.cookie')
-            .and.equal(rulesets.first.cookie)
-        })
+      it('Should add rules to criteria in', () => {
+        expect(upstreams[0]).to.have.deep.property('criteria.in.cookie')
+          .and.equal(rulesets.first.cookie)
 
-        it('Should have paths and not be the same', () => {
-          // remember that paths are transformed into a regex
-          expect(upstreams[0]).to.have.deep.property('criteria.in.path')
-            .and.not.equal(rulesets.first.path)
-        })
+        // remember that paths are transformed into a regex
+        expect(upstreams[0]).to.have.deep.property('criteria.in.path')
+          .and.not.equal(rulesets.first.path)
 
-        it('Should have buckets and be the same', () => {
-          expect(upstreams[0]).to.have.deep.property('criteria.in.bucket')
-            .and.equal(rulesets.first.bucket)
-        })
+        expect(upstreams[0]).to.have.deep.property('criteria.in.bucket')
+          .and.equal(rulesets.first.bucket)
+
+        // remember that agents are transformed into a regex
+        expect(upstreams[0]).to.have.deep.property('criteria.in.agent')
+          .and.not.equal(rulesets.third.agent)
       })
 
-      describe('Evaluate second ruleset', () => {
-        it('Should have cookies and be the same', () => {
-          expect(upstreams[0]).to.have.deep.property('criteria.out.cookie')
-            .and.equal(rulesets.second.cookie)
-        })
+      it('Should add rules to criteria out', () => {
+        expect(upstreams[0]).to.have.deep.property('criteria.out.cookie')
+          .and.equal(rulesets.second.cookie)
 
-        it('Should have agents and not be the same', () => {
-          // remember that agents are transformed into a regex
-          expect(upstreams[0]).to.have.deep.property('criteria.out.agent')
-            .and.not.equal(rulesets.second.agent)
-        })
+        // remember that agents are transformed into a regex
+        expect(upstreams[0]).to.have.deep.property('criteria.out.agent')
+          .and.not.equal(rulesets.second.agent)
 
-        it('Should have buckets and be the same', () => {
-          expect(upstreams[0]).to.have.deep.property('criteria.out.bucket')
-            .and.equal(rulesets.second.bucket)
-        })
-      })
-
-      describe('Evaluate third ruleset', () => {
-        it('Should have agents and not be the same', () => {
-          // remember that agents are transformed into a regex
-          expect(upstreams[0]).to.have.deep.property('criteria.in.agent')
-            .and.not.equal(rulesets.third.agent)
-        })
+        expect(upstreams[0]).to.have.deep.property('criteria.out.bucket')
+          .and.equal(rulesets.second.bucket)
       })
     })
 
