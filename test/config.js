@@ -48,6 +48,7 @@ const rulesets = {
 }
 
 let firstUp = {
+  name: 'firstUp',
   enabled: true,
   criteria: {
     in: {
@@ -66,6 +67,7 @@ let firstUp = {
 }
 
 let secondUp = {
+  name: 'secondUp',
   enabled: true,
   criteria: {
     in: {
@@ -81,6 +83,7 @@ let secondUp = {
 }
 
 let thirdUp = {
+  name: 'thirdUp',
   enabled: true,
   criteria: {
     in: {
@@ -97,6 +100,7 @@ let thirdUp = {
 }
 
 let fourthUp = {
+  name: 'fourthUp',
   enabled: true,
   criteria: {
     in: {
@@ -135,6 +139,7 @@ let fourthUp = {
 }
 
 let fifthUp = {
+  name: 'fifthUp',
   enabled: true,
   upstream: {
     type: 'serve',
@@ -145,6 +150,7 @@ let fifthUp = {
 }
 
 let sixthUp = {
+  name: 'sixthUp',
   enabled: true,
   criteria: {
     in: {
@@ -157,6 +163,22 @@ let sixthUp = {
     type: 'serve',
     options: {
       host: 'www.mindera.com'
+    }
+  }
+}
+
+let seventhUp = {
+  name: 'seventhUp',
+  enabled: true,
+  criteria: {},
+  upstream: {
+    type: 'serve',
+    options: {
+      host: 'www.mindera.com',
+      rewrite: {
+        expression: '(.*)',
+        to: '/noticias/atualidade'
+      }
     }
   }
 }
@@ -177,6 +199,7 @@ before(() => {
   fourthUp = getOptimizedUpstream(fourthUp)
   fifthUp = getOptimizedUpstream(fifthUp)
   sixthUp = getOptimizedUpstream(sixthUp)
+  seventhUp = getOptimizedUpstream(seventhUp)
 })
 
 describe('Evaluate configuration optimization', () => {
@@ -299,6 +322,15 @@ describe('Evaluate configuration optimization', () => {
       expect(sixthUp).to.have.deep.property('criteria.in.path')
         .and.to.have.lengthOf(paths.length)
         .and.not.equal(paths)
+    })
+
+    it('Should have property regExp in options.rewrite when rewrite is set', () => {
+      expect(seventhUp).to.have.deep.property('upstream.options.rewrite.regExp')
+    })
+
+    it('Shouldn\'t have property options.rewrite nor rewrite.regExp when rewrite isn\'t set', () => {
+      expect(sixthUp).to.not.have.deep.property('upstream.options.rewrite')
+        .and.to.not.have.deep.property('upstream.options.rewrite.regExp')
     })
   })
 
