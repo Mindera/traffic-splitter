@@ -183,6 +183,29 @@ let seventhUp = {
   }
 }
 
+let eighthUp = {
+  name: 'eighthUp',
+  enabled: true,
+  upstream: {
+    type: 'loadbalancer',
+    options: {
+      hosts: ['www.google.pt', 'www.google.com']
+    }
+  }
+}
+
+let ninethUp = {
+  name: 'eighthUp',
+  enabled: true,
+  upstream: {
+    type: 'loadbalancer',
+    options: {
+      hosts: ['www.google.pt', 'www.google.com'],
+      healthcheck: {}
+    }
+  }
+}
+
 const getOptimizedUpstream = (upstream) => config.getOptimizedUpstreams({
   pathRegExp: {
     prefix: '^',
@@ -200,6 +223,8 @@ before(() => {
   fifthUp = getOptimizedUpstream(fifthUp)
   sixthUp = getOptimizedUpstream(sixthUp)
   seventhUp = getOptimizedUpstream(seventhUp)
+  eighthUp = getOptimizedUpstream(eighthUp)
+  ninethUp = getOptimizedUpstream(ninethUp)
 })
 
 describe('Evaluate configuration optimization', () => {
@@ -368,6 +393,24 @@ describe('Evaluate configuration optimization', () => {
       expect(config.getPerformance({performance: {slowRequestThreshold: 1234}}))
         .to.have.property('slowRequestThreshold')
         .and.equal(1234)
+    })
+  })
+
+  describe('Evaluate loadbalancer healthcheck handling', () => {
+    it('Should set healthcheck property when not set', () => {
+      expect(eighthUp).to.have.deep.property('upstream.options.healthcheck')
+        .and.equal({
+          path: '',
+          interval: 5000,
+          timeout: 4000,
+          healthyThreshold: 2,
+          unhealthyThreshold: 2
+        })
+    })
+
+    it('Should add healthcheck properties when missing', () => {
+      expect(ninethUp).to.have.deep.property('upstream.options.healthcheck')
+        .and.to.have.all.keys('path', 'interval', 'timeout', 'healthyThreshold', 'unhealthyThreshold')
     })
   })
 })

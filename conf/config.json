@@ -92,6 +92,26 @@
   },
   "upstreams": [
     {
+      "name": "balanceMe",
+      "enabled": true,
+      "upstream": {
+        "type": "loadbalancer",
+        "options": {
+          "hosts": [
+            "www.google.com",
+            "www.google.pt"
+          ],
+          "healthcheck": {
+            "path": "/healthcheck",
+            "interval": 5678,
+            "timeout": 2222,
+            "healthyThreshold": 2,
+            "unhealthyThreshold": 3
+          }
+        }
+      }
+    },
+    {
       "name": "empty",
       "enabled": false,
       "upstream": {
