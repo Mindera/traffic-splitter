@@ -4,6 +4,7 @@
   "description": "Splits incoming traffic to upstream backends",
   "main": "index.js",
   "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "standard && node index.js",
     "fix": "standard --fix"
   },
@@ -23,7 +24,9 @@
     "restify-cookies": "^0.2.2"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
+    "mocha": "^3.3.0",
     "standard": "^9.0.2"
   },
   "standard": {

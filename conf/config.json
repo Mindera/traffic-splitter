@@ -12,6 +12,10 @@
     "emitMetricsInterval": {
       "http": 10000,
       "https": 10000
+    },
+    "performance": {
+      "logSlowRequests": true,
+      "slowRequestThreshold": 1000
     }
   },
   "bunyan": {
@@ -87,6 +91,13 @@
     }
   },
   "upstreams": [
+    {
+      "name": "empty",
+      "enabled": false,
+      "upstream": {
+        "type": "serve"
+      }
+    },
     {
       "name": "paths",
       "enabled": true,
@@ -224,10 +235,6 @@
               "city": "Faro"
             }
           ],
-          "agent": [
-            "Chrome",
-            "Mozilla"
-          ],
           "device": [
             {
               "device": "desktop",
@@ -278,6 +285,11 @@
             {
               "path": [
                 "/pizza"
+              ]
+            },
+            {
+              "agent": [
+                "Chrome"
               ]
             }
           ]

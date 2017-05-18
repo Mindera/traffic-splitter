@@ -60,10 +60,10 @@ splitter.events.on('upstreamException', (exception, upstream) => {
   log.info('Event: upstreamException -> exception = ', exception)
 })
 splitter.events.on('httpSocketMetrics', agentStatus => {
-  log.info('Event: httpSocketMetrics -> agentStatus = ', agentStatus)
+  // log.info('Event: httpSocketMetrics -> agentStatus = ', agentStatus)
 })
 splitter.events.on('httpsSocketMetrics', agentStatus => {
-  log.info('Event: httpsSocketMetrics -> agentStatus = ', agentStatus)
+  // log.info('Event: httpsSocketMetrics -> agentStatus = ', agentStatus)
 })
 splitter.events.on('redirecting', (statusCode, upstream, duration) => {
   log.info(`Event: redirecting -> duration = ${duration}`)
@@ -73,3 +73,12 @@ splitter.events.on('redirecting', (statusCode, upstream, duration) => {
 // start can only be called once
 splitter.start()
 // splitter.start() // will trigger error message
+
+const config81 = JSON.parse(require('fs').readFileSync('./conf/config81.json'))
+const splitter81 = new TrafficSplitter(config81)
+const log81 = splitter.getLogger()
+splitter81.use((server, config) => (req, res, next) => {
+  log81.info(`---------------------------------81---------------------------------`)
+  return next()
+})
+splitter81.start()
