@@ -214,7 +214,6 @@ describe('Evaluate configuration optimization', () => {
       })
     })
 
-
     describe('Evaluate addition of rules to criteria', () => {
       it('Should add rules to criteria in', () => {
         expect(firstUp).to.have.deep.property('criteria.in.cookie')
