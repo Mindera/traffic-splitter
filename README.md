@@ -7,25 +7,25 @@ How it really works? It's not magic..
 
 [![Traffic Splitter](https://cloud.githubusercontent.com/assets/12852058/26411570/15979fe6-409e-11e7-85e9-440f87e1ebad.png)](https://www.mindera.com)
 
-#### Getting started
-> npm install traffic-splitter --save
+## Getting started
+> npm install traffic-splitter --save // yet not available
 
 ```javascript
-const TrafficSplitter = require('traffic-splitter') // yet not available
+const TrafficSplitter = require('traffic-splitter')
 const splitter = new TrafficSplitter(/*your configuration*/)
 splitter.start()
 ```
 And BOOM, splitter is running!
 > localhost:PORT/healthcheck
 
-#### Simple example
+## Simple example
 
 
-#### Upstreams
+## Upstreams
 
-#### Criteria
+## Criteria
 
-#### Configuration
+## Configuration
   1. [api](http://trafficsplitter.io/configuration/api) *
   2. [bunyan](http://trafficsplitter.io/configuration/bunyan) *
   3. [browserId](http://trafficsplitter.io/configuration/browserId) *
@@ -36,7 +36,7 @@ And BOOM, splitter is running!
 
 \* - required
 
-#### Other cool stuff you can do
+## Other cool stuff you can do
   - [Have many instances running on different ports](http://trafficsplitter.io/instances)
   - [Add request middlewares](http://trafficsplitter.io/middlewares)
   - [Override default rules](http://trafficsplitter.io/default-rules)
