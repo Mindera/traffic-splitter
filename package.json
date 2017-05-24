@@ -12,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/DuarteMendes/traffic-splitter"
+    "url": "https://github.com/Mindera/traffic-splitter"
   },
   "dependencies": {
     "agentkeepalive": "^3.1.0",
