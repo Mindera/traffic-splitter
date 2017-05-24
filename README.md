@@ -5,7 +5,7 @@ Traffic Splitter is a component that allows for HTTP traffic to be directed to a
 
 How it really works? It's not magic..
 
-[![Traffic Splitter](https://photos-1.dropbox.com/t/2/AACen0fTStX5H-S-usUITXcA7upuu3K-QlA1PjrTZfEgcQ/12/226347707/png/32x32/1/_/1/2/Traffic%20Splitter.png/EIqv9akBGI3e-AEgBygH/TJnSk7V6AIGTed1nXtJUj-89P1698amWyf71CmpOAcg?size=1280x960&size_mode=3)](https://www.mindera.com)
+[![Traffic Splitter](https://cloud.githubusercontent.com/assets/12852058/26411570/15979fe6-409e-11e7-85e9-440f87e1ebad.png)](https://www.mindera.com)
 
 #### Getting started
 > npm install traffic-splitter --save
