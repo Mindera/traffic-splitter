@@ -7,7 +7,6 @@ How it really works? It's not magic..
 
 ![architecture](https://cloud.githubusercontent.com/assets/12852058/26765165/5faa2eb8-496e-11e7-9a06-718519844875.png)
 
-
 ## Getting started
 > npm install traffic-splitter --save // yet not available
 
@@ -19,4 +18,7 @@ splitter.start()
 And BOOM, splitter is running!
 > localhost:PORT/healthcheck
 
-For examples, how-to's, configuration samples and documentation check [trafficsplitter.io](trafficsplitter.io).
+## More... so much more
+This is awesome! Please give me some examples, how-to's, configuration samples and documentation!
+
+Sure thing! Here you go... [trafficsplitter.io](http://trafficsplitter.io).
