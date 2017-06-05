@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Splits incoming traffic to upstream backends",
   "main": "index.js",
+  "bin": {
+    "traffic-splitter": "./bin/traffic-splitter.js"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "standard && node index.js",
     "fix": "standard --fix"
   },
-  "author": "",
+  "author": "Mindera",
   "license": "ISC",
   "repository": {
     "type": "git",
