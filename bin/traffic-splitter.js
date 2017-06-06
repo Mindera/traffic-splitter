@@ -3,13 +3,11 @@
 const program = require('commander')
 const chalk = require('chalk')
 
-const version = require('../package.json').version
-
 const error = chalk.bold.red
 const logErr = (msg) => console.log(error(msg))
 
 program
-  .version(version)
+  .version(require('../package.json').version)
   .description('For better use of traffic-splitter create an isolated app. Take advantage of custom rules, handling events and adding middlewares.')
   .option('-c, --conf <file>', 'provide configuration file (.json or .js with module.exports = {...})')
 
