@@ -1,7 +1,14 @@
 {
   "name": "traffic-splitter",
-  "version": "1.0.0",
   "description": "Splits incoming traffic to upstream backends",
+  "author": "Mindera",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mindera/traffic-splitter"
+  },
+  "homepage": "http://trafficsplitter.io",
+  "version": "1.0.0",
   "main": "index.js",
   "bin": {
     "traffic-splitter": "./bin/traffic-splitter.js"
@@ -10,12 +17,6 @@
     "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "standard && node index.js",
     "fix": "standard --fix"
-  },
-  "author": "Mindera",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Mindera/traffic-splitter"
   },
   "dependencies": {
     "agentkeepalive": "^3.1.0",
