@@ -3,33 +3,34 @@
 const program = require('commander')
 const chalk = require('chalk')
 
+const version = require('../package.json').version
+
 const error = chalk.bold.red
 const logErr = (msg) => console.log(error(msg))
 
 program
-  .version('1.0.0')
+  .version(version)
   .description('For better use of traffic-splitter create an isolated app. Take advantage of custom rules, handling events and adding middlewares.')
-  .option('-c, --conf <file>', 'provide configuration')
+  .option('-c, --conf <file>', 'provide configuration file (.json or .js with module.exports = {...})')
 
 program.on('/help', () => program.help())
 
 program.parse(process.argv)
 
 if (!program.conf) {
-  logErr('Configuration missing.')
-  logErr('Use: traffic-splitter -c yourConfiguration.json.')
+  logErr('Missing configuration file.')
+  logErr('Use: traffic-splitter -c yourConfigurationFile.')
   program.help()
-}
-
-if (!program.conf.endsWith('.json')) {
-  logErr('Configuration file must be a JSON file.')
-  process.exit(1)
 }
 
 const fs = require('fs')
 let config
 try {
-  config = JSON.parse(fs.readFileSync(program.conf))
+  if (program.conf.endsWith('.json')) {
+    config = JSON.parse(fs.readFileSync(program.conf))
+  } else {
+    config = require(process.cwd() + '/' + program.conf)
+  }
 } catch (err) {
   logErr(err)
   process.exit(1)
@@ -38,7 +39,7 @@ try {
 const TrafficSplitter = require('..')
 
 if (!TrafficSplitter.isConfigurationValid(config)) {
-  logErr('Configuration invalid. Please check traffic-splitter documentation at http://trafficsplitter.io')
+  logErr('Invalid configuration. Please check traffic-splitter documentation at http://trafficsplitter.io')
   process.exit()
 }
 
