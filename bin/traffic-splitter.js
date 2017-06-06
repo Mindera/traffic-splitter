@@ -21,14 +21,9 @@ if (!program.conf) {
   program.help()
 }
 
-const fs = require('fs')
 let config
 try {
-  if (program.conf.endsWith('.json')) {
-    config = JSON.parse(fs.readFileSync(program.conf))
-  } else {
-    config = require(process.cwd() + '/' + program.conf)
-  }
+  config = require(process.cwd() + '/' + program.conf)
 } catch (err) {
   logErr(err)
   process.exit(1)
