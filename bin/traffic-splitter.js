@@ -38,7 +38,7 @@ const TrafficSplitter = require('..')
 
 if (!TrafficSplitter.isConfigurationValid(config)) {
   logErr('Invalid configuration. Please check traffic-splitter documentation at http://trafficsplitter.io')
-  process.exit()
+  process.exit(1)
 }
 
 try {
