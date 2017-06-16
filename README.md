@@ -1,5 +1,6 @@
-Traffic Splitter
-==
+<img src="http://trafficsplitter.io/images/logos/png/tf-original.png" alt="logo" width="250" height="250" />
+
+***
 
 Traffic Splitter is a component that allows for HTTP traffic to be directed to an appropriate upstream depending on the request matching certain criteria.
 
@@ -7,7 +8,7 @@ Traffic Splitter is a component that allows for HTTP traffic to be directed to a
 
 How it really works? It's not magic..
 
-![architecture](https://cloud.githubusercontent.com/assets/12852058/26765165/5faa2eb8-496e-11e7-9a06-718519844875.png)
+![architecture](http://trafficsplitter.io/images/architecture.png)
 
 <br>
 
