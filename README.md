@@ -1,7 +1,3 @@
-<img src="http://trafficsplitter.io/images/logos/png/tf-original.png" alt="logo" width="250" height="250" />
-
-***
-
 Traffic Splitter is a component that allows for HTTP traffic to be directed to an appropriate upstream depending on the request matching certain criteria.
 
 <br>
@@ -51,3 +47,7 @@ And BOOM, splitter is running!
 This is awesome! Please give me some examples, how-to's, configuration samples and documentation!
 
 Sure thing! Here you go... [trafficsplitter.io](http://trafficsplitter.io)
+
+<br>
+
+<img src="http://trafficsplitter.io/images/logos/png/tf-original.png" alt="logo" width="250" height="250" />
