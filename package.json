@@ -5,16 +5,16 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mindera/traffic-splitter"
+    "url": "git+https://github.com/Mindera/traffic-splitter.git"
   },
   "homepage": "http://trafficsplitter.io",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "index.js",
   "bin": {
     "traffic-splitter": "./bin/traffic-splitter.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec",
+    "test": "mocha --reporter spec",
     "start": "standard && node index.js",
     "fix": "standard --fix"
   },
@@ -38,5 +38,16 @@
     "ignore": [
       "/test/**"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/Mindera/traffic-splitter/issues"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [
+    "http",
+    "traffic"
+  ]
 }
