@@ -188,7 +188,6 @@ const getOptimizedUpstream = (upstream) => config.getOptimizedUpstreams({
     prefix: '^',
     sufix: '([/?].*)?$'
   },
-  rulesets,
   upstreams: [upstream]
 })[0]
 
@@ -204,50 +203,21 @@ before(() => {
 
 describe('Evaluate configuration optimization', () => {
   describe('Evaluate rulesets concatenation', () => {
-    describe('Evaluate elimination of ruleset property', () => {
-      it('Should not have property in criteria.in', () => {
-        expect(firstUp).to.not.have.deep.property('criteria.in.ruleset')
+    describe('Evaluate survival of ruleset property', () => {
+      it('Should keep property in criteria.in', () => {
+        expect(firstUp).to.have.deep.property('criteria.in.ruleset')
       })
 
-      it('Should not have property in criteria.out', () => {
-        expect(firstUp).to.not.have.deep.property('criteria.out.ruleset')
-      })
-    })
-
-    describe('Evaluate addition of rules to criteria', () => {
-      it('Should add rules to criteria in', () => {
-        expect(firstUp).to.have.deep.property('criteria.in.cookie')
-          .and.equal(rulesets.first.cookie)
-
-        // remember that paths are transformed into a regex
-        expect(firstUp).to.have.deep.property('criteria.in.path')
-          .and.not.equal(rulesets.first.path)
-
-        expect(firstUp).to.have.deep.property('criteria.in.bucket')
-          .and.equal(rulesets.first.bucket)
-
-        // remember that agents are transformed into a regex
-        expect(firstUp).to.have.deep.property('criteria.in.agent')
-          .and.not.equal(rulesets.third.agent)
-      })
-
-      it('Should add rules to criteria out', () => {
-        expect(firstUp).to.have.deep.property('criteria.out.cookie')
-          .and.equal(rulesets.second.cookie)
-
-        // remember that agents are transformed into a regex
-        expect(firstUp).to.have.deep.property('criteria.out.agent')
-          .and.not.equal(rulesets.second.agent)
-
-        expect(firstUp).to.have.deep.property('criteria.out.bucket')
-          .and.equal(rulesets.second.bucket)
+      it('Should keep property in criteria.out', () => {
+        expect(firstUp).to.have.deep.property('criteria.out.ruleset')
       })
     })
 
-    describe('Evaluate properties overriding', () => {
-      it('Should have property from last ruleset', () => {
-        expect(secondUp).to.have.deep.property('criteria.in.agent')
-          .and.to.have.lengthOf(1)
+    describe('Evaluate that properties from rulesets aren\'t being added to criteria', () => {
+      it('Should not have properties from rulesets', () => {
+        expect(secondUp).to.not.have.deep.property('criteria.in.agent')
+        expect(secondUp).to.not.have.deep.property('criteria.in.bucket')
+        expect(secondUp).to.not.have.deep.property('criteria.in.cookie')
       })
 
       it('Should keep property from own criteria and not override from ruleset', () => {
