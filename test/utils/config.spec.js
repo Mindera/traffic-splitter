@@ -1,5 +1,5 @@
 const {expect} = require('chai')
-const {config} = require('../lib/utils')
+const {config} = require('../../lib/utils')
 
 const geoips = [
   {
