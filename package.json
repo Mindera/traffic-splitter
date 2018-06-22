@@ -16,7 +16,6 @@
   "scripts": {
     "pretest": "standard --verbose",
     "test": "nyc mocha --recursive",
-    "start": "node index.js",
     "code-format": "standard --fix"
   },
   "dependencies": {
