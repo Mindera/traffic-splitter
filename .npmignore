@@ -1,0 +1,8 @@
+# Tests
+test
+
+# Build tools
+.travis.yml
+
+# Coverage
+.nycrc

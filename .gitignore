@@ -1,3 +1,4 @@
+# Dependency directories
 node_modules
 
 # Logs
@@ -5,4 +6,12 @@ logs
 *.log
 npm-debug.log*
 
+# dotenv environment variables file
 .env
+
+# Editor settings
+.idea
+
+# Coverage
+coverage
+.nyc_output/
