@@ -14,9 +14,10 @@
     "traffic-splitter": "./bin/traffic-splitter.js"
   },
   "scripts": {
-    "test": "mocha --reporter spec",
-    "start": "standard && node index.js",
-    "fix": "standard --fix"
+    "pretest": "standard --verbose",
+    "test": "nyc mocha --recursive",
+    "start": "node index.js",
+    "code-format": "standard --fix"
   },
   "dependencies": {
     "agentkeepalive": "^3.1.0",
@@ -34,6 +35,7 @@
     "chai": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
     "standard": "^9.0.2"
   },
   "standard": {
@@ -50,6 +52,10 @@
   },
   "keywords": [
     "http",
-    "traffic"
+    "traffic",
+    "trafficsplitter",
+    "traffic-splitter",
+    "traffic-splitting",
+    "api-gateway"
   ]
 }
