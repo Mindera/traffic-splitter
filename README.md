@@ -1,3 +1,5 @@
+# traffic-splitter [![NPM version][npm-image]][npm-url] [![build status][travis-image]][travis-url]
+
 traffic-splitter is a component that allows for HTTP traffic to be directed to an appropriate upstream depending on the request matching certain criteria.
 
 <br>
@@ -51,3 +53,8 @@ Sure thing! Here you go... [trafficsplitter.io](http://trafficsplitter.io)
 <br>
 
 <img src="http://trafficsplitter.io/images/logos/png/tf-original.png" alt="logo" width="250" height="250" />
+
+[npm-image]: https://img.shields.io/npm/v/traffic-splitter.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/traffic-splitter
+[travis-image]: https://travis-ci.org/Mindera/traffic-splitter.svg?branch=master
+[travis-url]: https://travis-ci.org/Mindera/traffic-splitter
