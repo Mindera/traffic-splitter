@@ -13,3 +13,4 @@ deploy:
     tags: true
     repo: Mindera/traffic-splitter
     branch: master
+    node: '10'
