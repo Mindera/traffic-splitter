@@ -1,5 +1,6 @@
-const {expect} = require('chai')
-const {evaluateRules} = require('../../lib/utils/rules')
+const { expect } = require('chai')
+
+const { evaluateRules } = require('../../lib/utils/rules')
 
 const bid56 = 'b72559fc5490'
 const bid80 = 'dc3d860620cc'
