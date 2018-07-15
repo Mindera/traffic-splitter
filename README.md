@@ -11,9 +11,9 @@ How it really works? It's not magic..
 <br>
 
 ## Getting started
-There are two ways you can use this package and both need to be provided with a configuration.
+There are two ways you can use this package. Both need to be provided with a configuration.
 
-Personalize your own [configuration](http://trafficsplitter.io/#configuration) or go [here](http://trafficsplitter.io/#ready-to-go-configuration) for a sample.
+Free configuration samples in [here](https://github.com/Mindera/traffic-splitter/tree/configuration-samples).
 
 ### CLI
 ```shell
@@ -46,7 +46,7 @@ And BOOM, splitter is running!
 <br>
 
 ## More... so much more
-This is awesome! Please give me some examples, how-to's, configuration samples and documentation!
+What about docs?
 
 Sure thing! Here you go... [trafficsplitter.io](http://trafficsplitter.io)
 
