@@ -1,0 +1,70 @@
+{
+  "api": {
+    "serverName": "traffic-splitter",
+    "port": 8080,
+    "maxConnections": 1024,
+    "upstreamKeepAlive": {
+      "maxSockets": 1024,
+      "maxFreeSockets": 64,
+      "timeout": 60000,
+      "keepAliveTimeout": 30000
+    },
+    "performance": {
+      "logSlowRequest": false,
+      "slowRequestThreshold": 2500
+    }
+  },
+  "bunyan": {
+    "name": "traffic-splitter",
+    "streams": []
+  },
+  "browserId": {
+    "cookie": "bid",
+    "maxAge": 315360000,
+    "length": 12
+  },
+  "upstreams": [
+    {
+      "name": "my-api",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "bucket": [
+            {
+              "min": 0,
+              "max": 50
+            }
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "my-api",
+          "port": 8080
+        }
+      }
+    },
+    {
+      "name": "my-api-v2",
+      "enabled": true,
+      "criteria": {
+        "in": {
+          "bucket": [
+            {
+              "min": 51,
+              "max": 100
+            }
+          ]
+        }
+      },
+      "upstream": {
+        "type": "serve",
+        "options": {
+          "host": "my-api-v2",
+          "port": 8080
+        }
+      }
+    }
+  ]
+}
