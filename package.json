@@ -35,6 +35,7 @@
     "eslint-plugin-react": "^6.10.3",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
+    "sinon": "^6.1.4",
     "standard": "^9.0.2"
   },
   "standard": {
@@ -46,6 +47,7 @@
     "url": "https://github.com/Mindera/traffic-splitter/issues"
   },
   "directories": {
+    "bin": "bin",
     "lib": "lib",
     "test": "test"
   },
