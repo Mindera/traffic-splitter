@@ -146,7 +146,7 @@ describe('Evaluate configuration optimization', () => {
     it('Should set upstream when it is provided by name reference', () => {
       expect(optimizedUpstreams[0].upstream).to.deep.equal(upstreamsReferences.mindera)
     })
-  });
+  })
 
   describe('Evaluate rulesets concatenation', () => {
     describe('Evaluate survival of ruleset property', () => {
