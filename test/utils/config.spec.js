@@ -1,3 +1,5 @@
+'use strict'
+
 const { expect } = require('chai')
 
 const { config } = require('../../lib/utils')
