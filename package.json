@@ -15,7 +15,8 @@
   },
   "scripts": {
     "pretest": "standard --verbose",
-    "test": "nyc mocha --recursive",
+    "test": "mocha --recursive",
+    "code-coverage": "nyc npm t",
     "code-format": "standard --fix"
   },
   "dependencies": {
