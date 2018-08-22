@@ -288,4 +288,24 @@ describe('Evaluate configuration optimization', () => {
         .and.equal(1234)
     })
   })
+
+  describe('hasAtLeastOneUpstreamOfType()', function () {
+    before(function () {
+      this.configWithUpstreams = {
+        upstreams: [
+          { upstream: { type: 'serve' } },
+          { upstream: { type: 'serveFile' } },
+          { upstream: { type: 'serveSecure' } }
+        ]
+      }
+    })
+
+    it('should return true when there is at least one upstream with given type', function () {
+      expect(config.hasAtLeastOneUpstreamOfType(this.configWithUpstreams, 'serve')).to.be.true
+    })
+
+    it('should return false when there are no upstreams with given type', function () {
+      expect(config.hasAtLeastOneUpstreamOfType(this.configWithUpstreams, 'redirect')).to.be.false
+    })
+  })
 })
